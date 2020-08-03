@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style type="text/css">
+        #preview{
+            width: 100px;
+            height: 100px;
+        }
+    </style>
+    <!--[if lte IE 9]>
+    <style type="text/css">
+        #preview{
+            filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(sizingMethod=scale);
+        }
+    </style>
+    <![endif]-->
+</head>
+<body>
+
+
+<input type="file" onchange="showPreview(this);"/>
+<div id="preview">
+</div>
+<script>
+    var showPreview = function(el){
+        var pv = document.getElementById("preview");
+        // IE5.5~9使用滤镜
+        if (pv.filters && typeof(pv.filters.item) === 'function'){
+            pv.filters.item("DXImageTransform.Microsoft.AlphaImageLoader").src = el.value;
+        }
+        else{
+            // 其他浏览器和IE10+（不支持滤镜）则使用FileReader
+            var fr = new FileReader();
+            fr.onload = function(evt){
+                var pvImg = new Image();
+                pvImg.style.width = pv.offsetWidth + 'px';
+                pvImg.style.height = pv.offsetHeight + 'px';
+                pvImg.src = evt.target.result;
+                pv.removeChild(pv.childNodes[0]);
+                pv.appendChild(pvImg);
+
+            };
+            fr.readAsDataURL(el.files[0]);
+        }
+    };
+
+</script>
+
+</body>
+</html>

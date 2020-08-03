@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Node(value) {
+        this.value=value;
+        this.left=null;
+        this.right=null
+
+    }
+
+    const a=new Node("a")
+    const b=new Node("b")
+    const c=new Node("c")
+    const d=new Node("d")
+    const e=new Node("e")
+    const f=new Node("f");
+    a.left=b;
+    b.left=c;
+    b.right=d;
+    a.right=e;
+    e.left=f;
+
+    //深度  有点类似前序遍历
+    /**
+     *
+     * @param root 二叉树
+     * @param target 查询目标内容
+     * @constructor
+     */
+    function depth(root,target) {
+        if (!root) return false
+        if (root.value===target) return true
+
+       return depth(root.left,target)|| depth(root.right,target)
+
+    }
+
+    console.log(depth(a,"g"))
+    //广度
+    /**
+     *
+     * @param nodes 二叉树 节点 必须是数组
+     * @param target 查询目标内容
+     * @param finded 已经查询过的数组 节点  默认【】  可以不传值
+     * @constructor
+     */
+    function breadth(nodes,target,finded=[]) {
+
+        const nexts=new Set()
+        for (var i=0;i<nodes.length;i++){
+            if (!nodes[i]) return false
+            if (nodes[i].value===target){
+                return true
+            }
+            //把已经对比的节点push到已经查询finded数组中
+            finded.push(nodes[i])
+
+            nexts.add(nodes[i].left).add(nodes[i].right)
+        }
+      console.log(nexts)
+
+
+       return breadth( Array.from(nexts),target,finded)||false
+
+    }
+
+    console.log(new Set([1,2,3,null,3]))
+    console.log(breadth([a],"g"))
+</script>
+</body>
+</html>

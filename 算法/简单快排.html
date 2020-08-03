@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function quick(arr) {
+        if (!arr||arr.length===0){
+            return []
+        }
+        if (arr.length===1) return arr;
+        var heigh=arr.length-1;
+        var arr1=[];
+        var arr2=[];
+        for (var i=0;i<arr.length-1;i++) {
+            if (arr[i]<=arr[heigh]){
+                arr1.push(arr[i])
+
+            } else {
+                arr2.push(arr[i])
+            }
+        }
+
+        var arrLeft=quick(arr1);
+        var arrRight=quick(arr2);
+
+        return [...arrLeft,arr[heigh],...arrRight]
+
+
+    }
+
+    const arr=[11,4,5,3,6];
+    console.log(arr)
+    quick(arr)
+    console.log( quick(arr))
+</script>
+</body>
+</html>

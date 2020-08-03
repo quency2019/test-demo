@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Node(value) {
+        this.value=value;
+        this.neighbors=[];
+    }
+
+    const a=new Node("a")
+    const b=new Node("b")
+    const c=new Node("c")
+    const d=new Node("d")
+    const e=new Node("e")
+    a.neighbors.push(b,c,e);
+    b.neighbors.push(a,c,d);
+    c.neighbors.push(a,b);
+    d.neighbors.push(b,e);
+    e.neighbors.push(a,d);
+
+
+    /**
+     *[a] [b,c,e] [d]
+     * @param node 二叉树 节点
+     * @param target 查询目标内容
+     * @param finded 已经查询过的数组 节点  默认【】  可以不传值
+     * @constructor
+     */
+    function depth(node,target,finded=[]) {
+
+        if (finded.includes(node)) return false
+        console.log(node.value)
+        if (node.value===target){
+            return true
+        }
+
+        //把已经对比的节点push到已经查询finded数组中
+        finded.push(node)
+        for (var i=0;i<node.neighbors.length;i++) {
+            if(depth(node.neighbors[i],target,finded)){
+                return true
+            }
+        }
+        // 如果都没有找到
+        return false
+
+    }
+    // const result1=depth(a,"e",[])
+    // console.log( result1)
+    /**
+     *
+     * @param nodes 二叉树 节点 必须是数组
+     * @param target 查询目标内容
+     * @param finded 已经查询过的数组 节点  默认【】  可以不传值
+     * @constructor
+     */
+    function breadth(nodes,target,finded=[]) {
+
+        if (nodes.length===0) return false
+        console.log(nodes)
+        const nexts=new Set();
+        for (var i=0;i<nodes.length;i++) {
+            console.log(nodes[i].value)
+
+            if (nodes[i].value===target){
+                return true
+            }
+            //加入到已经搜索过的数组中
+            if (!finded.includes(nodes[i])) {
+                finded.push(nodes[i]);
+            }
+            for (var j=0;j<nodes[i].neighbors.length;j++){
+
+                if (!finded.includes(nodes[i].neighbors[j])) {
+                    if (!nodes.includes(nodes[i].neighbors[j])) {
+                        nexts.add(nodes[i].neighbors[j])
+
+                    }
+                }
+
+            }
+            console.log(finded)
+        }
+
+
+        console.log(...nexts)
+        console.log(finded)
+        return breadth([...nexts],target,finded)||false
+    }
+
+    const result2=breadth([a],"d",[])
+    console.log( result2)
+</script>
+</body>
+</html>

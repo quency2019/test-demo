@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    // var number=8
+    //
+    // function aaa() {
+    //     console.log(this.number)
+    //
+    // }
+    //
+    //
+    // var obj={
+    //     number:10,
+    //     ddd(fn){
+    //
+    //         fn()
+    //         this.number=55;
+    // },
+    //     gg(){
+    //         console.log(this.number)
+    //     }
+    // }
+    // obj.ddd(aaa);
+    // obj.gg()
+    // console.log(this.number)
+    //
+    // console.log(["10","8","11"].map(map))
+    var a=10
+    function aaa(a) {
+
+        return a+1
+    }
+
+    var b=aaa(a)
+
+    function aaa(a) {
+        console.log(a)
+
+        a=1111
+
+        function a() {
+
+        }
+
+        return a+2
+    }
+    console.log(a,b)
+</script>
+</body>
+</html>

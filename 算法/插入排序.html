@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+  
+    function insert(arr) {
+        if (!arr||arr.length===0) return
+
+
+        for (var i=1;i<arr.length;i++){
+
+            //只有当前面一个数大于后面一个数的时候才需要排序
+            if (arr[i]<arr[i-1]){
+                var temp=arr[i];
+                for (var j=i;j>=0;j--){
+
+                    //如果前一个数比temp 则序列向后移一位
+                    if (j>0||arr[j-1]>temp){
+                        arr[j]=arr[j-1]
+
+                    }else {
+                        arr[j]=temp;
+                        break;
+                    }
+
+                }
+
+
+            }
+
+
+        }
+
+    }
+    const arr=[11,4,5,3,6];
+    console.log(arr)
+    insert(arr)
+    console.log(arr)
+</script>
+</body>
+</html>

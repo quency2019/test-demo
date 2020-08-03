@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function quick(arr) {
+        if (!arr||arr.length===0) return []
+
+        function _quick(arr,low,high){
+            if (low>=high|| low>arr.length-1) return
+            var key=arr[high]
+
+            while (low<high){
+                while (low<high&&arr[low]<=key){
+                    low++
+                }
+                arr[high]=arr[low];
+                while (low<high&&arr[high]>key){
+                    high--
+                }
+                arr[low]=arr[high]
+            }
+            //low=high
+            arr[low]=key;
+            //
+            _quick(arr,0,low-1)
+            _quick(arr,low+1,high)
+        }
+
+        _quick(arr,0,arr.length-1)
+
+    }
+
+
+    const arr=[11,4,5,3,6];
+    console.log(arr)
+    quick(arr)
+    console.log( arr)
+</script>
+</body>
+</html>

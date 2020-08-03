@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            background: #b3effe;
+            height: 50px;
+            padding: 10px 20px;
+            box-sizing: border-box;
+        }
+
+        .left {
+            float: left;
+            height: 30px;
+            line-height: 30px;
+        }
+
+        .title::after{
+            content: "|";
+            margin-left: 20px;
+            font-size: 27px;
+            vertical-align: -2px;
+            color: #ccc;
+        }
+
+        .left ul{
+            margin: 0;
+            padding: 0;
+            list-style: none;
+            margin-left: 20px;
+            height: 30px;
+            overflow: hidden;
+        }
+
+        .left ul li{
+            height: 30px;
+        }
+        </style>
+</head>
+<body>
+<div class="container">
+    <div class="left title">
+        最新公告
+    </div>
+    <div class="left">
+        <ul>
+            <li>1. 广告一</li>
+            <li>2. 广告二</li>
+            <li>3. 广告三</li>
+            <li>4. 广告四</li>
+            <li>5. 广告五</li>
+        </ul>
+    </div>
+</div>
+<script src="../对象混合和克隆/deepClone.js"></script>
+<script src="../动画效果插件/animate.js"></script>
+<script>
+    var ul = document.querySelector(".left ul");
+    var height = 30;
+    var curTop = 0; //由于浏览器中scrollTop取值不精确
+
+    function cloneDom() {
+        var lastLi=ul.children[0].cloneNode(true)
+        ul.appendChild(lastLi)
+
+    }
+    cloneDom()
+    function startMove() {
+
+        const obj=new Animate({
+            total:500,
+            begin:{
+                top:curTop,
+            },
+            end:{
+                top:curTop+height,
+            },
+            onMove(curData){
+                curTop=curData.top
+                ul.scrollTop=curTop
+
+            },
+            onOver(){
+                console.log("结束")
+                if (ul.scrollHeight===curTop+height) {
+                    curTop = 0;
+                    ul.scrollTop=0
+                }
+
+            }
+        })
+
+        obj.start()
+    }
+
+    setInterval(()=>{
+        startMove()
+    },2000)
+
+
+
+</script>
+</body>
+</html>

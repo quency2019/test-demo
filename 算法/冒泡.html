@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //交换位置
+function exchange(index1,index2,arr) {
+
+    const temp=arr[index1];
+    arr[index1]=arr[index2];
+    arr[index2]=temp;
+
+}
+//、比较大小
+function compare(a,b) {
+    if (a>b) return true;
+    return false
+}
+
+
+function bubbling(arr) {
+    if (!arr||arr.length===0) return
+
+    for (var i=0;i<arr.length-1;i++){
+        for (var j=0;j<arr.length-i-1;j++){
+            if(compare(arr[j],arr[j+1])){
+                exchange(j,j+1,arr)
+            }
+        }
+
+
+    }
+
+}
+const arr=[11,4,5,3,6];
+    console.log(arr)
+    bubbling(arr)
+    console.log(arr)
+</script>
+</body>
+</html>

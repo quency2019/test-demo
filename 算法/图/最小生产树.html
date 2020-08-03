@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Node(value) {
+        this.value=value;
+        this.neighbors=[];
+    }
+
+    const a=new Node("a")
+    const b=new Node("b")
+    const c=new Node("c")
+    const d=new Node("d")
+    const e=new Node("e")
+    a.neighbors.push(b,c,e);
+    b.neighbors.push(a,c,d);
+    c.neighbors.push(a,b);
+    d.neighbors.push(b,e);
+    e.neighbors.push(a,d);
+
+    //  a       b     c      d       e
+    //a 0       8     3    infinity  4
+    //b 8       0     4      10      infinity
+    //c 3       4     0      3      infinity
+    //d infinity 10   3      0        6
+    //e 4   infinity infinity 6       0
+
+
+    const sides=[
+        [0,8,3,infinity,4],
+        [8,0,4,10,4,infinity],
+        [3,4,0,3,infinity],
+        [infinity,10,3,0,6],
+        [4,infinity,infinity,6,0],
+
+
+    ]
+</script>
+</body>
+</html>

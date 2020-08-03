@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    function Node(value) {
+        this.value=value;
+        this.left=null;
+        this.right=null
+
+    }
+
+    const a=new Node("a")
+    const b=new Node("b")
+    const c=new Node("c")
+    const d=new Node("d")
+    const e=new Node("e")
+    const f=new Node("f");
+    a.left=b;
+    b.left=c;
+    b.right=d;
+    a.right=e;
+    e.left=f;
+    //前序遍历
+    function DLR(root) {
+        if (!root) return;
+        console.log(root.value)
+
+        DLR(root.left)
+        DLR(root.right)
+    }
+
+    //中序遍历
+    function LDR(root) {
+        if (!root) return;
+
+        LDR(root.left)
+        console.log(root.value)
+
+        LDR(root.right)
+    }
+    LDR(a)
+    //后序遍历
+    function LRD(root) {
+        if (!root) return;
+
+        LRD(root.left)
+        LRD(root.right)
+        console.log(root.value)
+    }
+
+</script>
+</body>
+</html>

@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script src="demo.js"></script>
+<script>
+    var throttle=myPlugin.throttle((width)=>{
+            console.log("页面大小修改")
+        console.log(width)
+        }
+    ,1000,false)
+
+    window.onresize=function (e) {
+        throttle(document.documentElement.clientWidth)
+    }
+</script>
+</body>
+</html>

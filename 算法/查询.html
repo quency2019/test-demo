@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var num=0
+    function orderSearch(arr,target) {
+
+        for (var i=0;i<arr.length;i++){
+            num++
+            if (arr[i]===target){
+                return true
+            }
+        }
+        return false
+    }
+
+    function binarySearch(arr,target) {
+        var minIndex=0;
+        var maxIndex=arr.length-1;
+        while (minIndex <= maxIndex){
+
+            var mid=Math.floor((minIndex + maxIndex)/2)
+            if (arr[mid]===target) {
+                num++
+                return true
+            }else if (arr[mid]>target) {
+                num++
+                maxIndex=mid-1;
+            }else {
+                num++
+                minIndex=mid+1
+            }
+        }
+        return false
+
+
+    }
+
+    function differentSearch(arr,target) {
+        if (!arr||arr.length===0||target<arr[0]||target>arr[arr.length-1]) return false
+        var minIndex=0;
+        var maxIndex=arr.length-1;
+        while (minIndex <= maxIndex){
+            var mid=Math.floor((target-arr[0])/(arr[maxIndex]-arr[minIndex])*( maxIndex-minIndex)+minIndex)
+            if (arr[mid]===target) {
+                num++
+                return true
+            }else if (arr[mid]>target) {
+                num++
+                maxIndex=mid-1;
+            }else {
+                num++
+                minIndex=mid+1
+            }
+        }
+        return false
+
+
+    }
+
+
+
+
+    console.log(differentSearch(arr1,12))
+    console.log(num)
+
+</script>
+</body>
+</html>

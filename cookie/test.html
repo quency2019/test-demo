@@ -1,0 +1,119 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            width: 100px;
+            height: 100px;
+            background-color:aquamarine;
+            position: absolute;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<script>
+    let cookie = {
+        /**
+         *
+         * @param name  键
+         * @param val   值
+         * @param date  时间单位天  设置cookie过期时间为一个时间点
+         */
+        setCookie: function (name, val, date) {
+
+            var oDate = new Date();//时间对象
+            oDate.setDate(new Date().getDate() + date);
+            document.cookie = name + "=" + val + "; expires=" + oDate + "; path=/";
+
+
+        },
+        // /**
+        //  *
+        //  * @param name
+        //  * @param val
+        //  * @param date  单位秒
+        //  */
+        // setCookie: function (name, val, date) {
+        //
+        //     document.cookie = name + "=" + val + "; max-age=" + date + "; path=/";
+        //
+        //
+        // },
+        getCookie: function (name) {
+            //name 为想要取到的键值的键名
+
+            var resultArr =document.cookie.split("; ");
+            console.log( resultArr)
+            for (var i = 0; i < resultArr.length; i++) {
+                var nameArr = resultArr[i].split("=");
+                if (nameArr[0] == name) {
+                    return nameArr[1];
+                }
+            }
+        },
+        removeCookie: function (name) {
+            //name为想要删除的Cookie的键名
+            this.setCookie(name,"",0)
+        }
+    }
+    let drag={
+        init(dom){
+            this.dom=dom;
+            this.bindEvent()
+
+            let newLeft=cookie.getCookie("newLeft");
+            let newTop=cookie.getCookie("newTop");
+            console.log(newLeft)
+            if (newLeft){
+                this.dom.style.left=newLeft+"px";
+
+            }
+            if (newTop){
+                this.dom.style.top=newTop+"px";
+
+            }
+
+
+        },
+        bindEvent(){
+            this.dom.onmousedown=this.mouseDown.bind(this)
+
+        },
+        mouseDown(e){
+
+            this.disX=e.clientX- this.dom.offsetLeft;
+            this.disY=e.clientY- this.dom.offsetTop;
+            this.dom.onmousemove=this.mouseMove.bind(this)
+            this.dom.onmouseup=this.mouseUp.bind(this)
+
+        },
+        mouseMove(e){
+            this.newLeft=e.clientX-this.disX;
+            this.newTop=e.clientY-this.disY;
+            console.log( this.newLeft,this.newTop);
+            this.dom.style.left=this.newLeft+"px";
+            this.dom.style.top=this.newTop+"px";
+
+        },
+        mouseUp(){
+            this.dom.onmousemove=null;
+            this.dom.onmouseup=null;
+            cookie.setCookie("newLeft",this.newLeft,1)
+            cookie.setCookie("newTop",this.newTop,1)
+        }
+    }
+    drag.init(document.querySelector(".box"))
+
+
+
+
+    document.cookie="name=5555";
+    document.cookie="name1=5555111; domain=127.0.0.2; path=/asd";
+
+
+</script>
+</body>
+</html>

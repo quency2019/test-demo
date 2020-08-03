@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    //交换位置
+    function exchange(index1,index2,arr) {
+
+        const temp=arr[index1];
+        arr[index1]=arr[index2];
+        arr[index2]=temp;
+
+    }
+    //、比较大小
+    function compare(a,b) {
+        if (a>b) return true;
+        return false
+    }
+
+
+    function selection(arr) {
+        for (var i=0;i<arr.length;i++){
+            var min=arr[i];
+            var index=i;
+            console.log(i)
+            for (var j=i;j<arr.length;j++){
+                if (min>arr[j]){
+
+                    index=j;
+                    min=arr[j]
+                }
+            }
+            exchange(i,index,arr);
+        }
+
+
+    }
+    var arr=[3,6,1,8,9]
+    console.log(arr)
+    selection(arr)
+    console.log(arr)
+</script>
+</body>
+</html>

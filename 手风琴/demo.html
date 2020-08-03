@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container {
+            width: 300px;
+            margin: 0 auto;
+        }
+        .container .menu{
+            padding: 10px 0;
+        }
+
+        .container .menu h2 {
+            background: #F0F0F0;
+            padding: 5px 6px 4px 6px;
+            border: 1px solid #E0E0E0;
+            cursor: pointer;
+            font-size: 16px;
+            color: #666;
+            font-weight: normal;
+            margin: 0;
+        }
+
+        .container .menu .items {
+            padding-left: 20px;
+            display:none;
+            overflow: hidden;
+        }
+
+        .container .menu .items a {
+            display: block;
+            text-decoration: none;
+            font-size: 14px;
+            height: 30px;
+            line-height: 30px;
+            border-bottom: 1px solid #ccc;
+        }
+        .container .menu .items.active{
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="menu">
+        <h2>电影</h2>
+        <div class="items active">
+            <a href="">Lorem ipsum dolor sit.</a>
+            <a href="">Ipsa ullam sit cupiditate.</a>
+            <a href="">Beatae animi quidem consequuntur?</a>
+            <a href="">Enim obcaecati veniam autem?</a>
+            <a href="">Dolor perferendis sapiente ex!</a>
+        </div>
+    </div>
+    <div class="menu">
+        <h2>书籍</h2>
+        <div class="items">
+            <a href="">Lorem ipsum dolor sit.</a>
+            <a href="">Ipsa ullam sit cupiditate.</a>
+            <a href="">Beatae animi quidem consequuntur?</a>
+            <a href="">Enim obcaecati veniam autem?</a>
+            <a href="">Dolor perferendis sapiente ex!</a>
+        </div>
+    </div>
+
+    <div class="menu">
+        <h2>游戏</h2>
+        <div class="items">
+            <a href="">Lorem ipsum dolor sit.</a>
+            <a href="">Ipsa ullam sit cupiditate.</a>
+            <a href="">Beatae animi quidem consequuntur?</a>
+            <a href="">Enim obcaecati veniam autem?</a>
+            <a href="">Dolor perferendis sapiente ex!</a>
+        </div>
+    </div>
+    <div class="menu">
+        <h2>动漫</h2>
+        <div class="items">
+            <a href="">Lorem ipsum dolor sit.</a>
+            <a href="">Ipsa ullam sit cupiditate.</a>
+            <a href="">Beatae animi quidem consequuntur?</a>
+            <a href="">Enim obcaecati veniam autem?</a>
+            <a href="">Dolor perferendis sapiente ex!</a>
+        </div>
+    </div>
+    <div class="menu">
+        <h2>音乐</h2>
+        <div class="items">
+            <a href="">Lorem ipsum dolor sit.</a>
+            <a href="">Ipsa ullam sit cupiditate.</a>
+            <a href="">Beatae animi quidem consequuntur?</a>
+            <a href="">Enim obcaecati veniam autem?</a>
+            <a href="">Dolor perferendis sapiente ex!</a>
+        </div>
+    </div>
+</div>
+<script src="../对象混合和克隆/deepClone.js"></script>
+<script src="../动画效果插件/animate.js"></script>
+<script>
+var container=document.querySelector('.container')
+var aHeight = 30; //每一个a元素的高度
+container.onclick=function (e) {
+    if(e.target.tagName==="H2"){
+
+        const div=e.target.nextElementSibling
+        if (div.classList.contains("active")){
+            return
+        }
+        var before=container.querySelector('.active')
+        if(before){
+            hide(before)
+        }
+
+        show(div)
+
+    }
+
+}
+//显示元素
+function show(div) {
+    div.style.height=0;
+    var targetHeight = div.children.length * aHeight;
+    const obj=new Animate({
+        total:300,
+        begin:{
+            height:0
+        },
+        end:{
+            height:targetHeight
+        },
+        onMove(curDate){
+            div.style.height=curDate.height+"px"
+        }
+    })
+    obj.start()
+    div.classList.add("active")
+
+}
+
+    //隐藏元素
+
+function hide(div) {
+    var height=div.clientHeight;
+
+    const obj=new Animate({
+        total:300,
+        begin:{
+            height:height
+        },
+        end:{
+            height:0},
+        onMove(curDate){
+            div.style.height=curDate.height+"px"
+        },
+        onOver: function () {
+            div.classList.remove("active");
+        }
+    })
+    obj.start()
+
+
+}
+
+</script>
+</body>
+</html>

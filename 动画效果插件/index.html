@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .box{
+            position: absolute;
+            width: 100px;
+            height: 100px;
+            top: 100px;
+            left: 100px;
+        }
+    </style>
+</head>
+<body>
+<div class="box"></div>
+<button class="start">开始</button>
+<button class="stop">结束</button>
+<script src="../对象混合和克隆/deepClone.js"></script>
+<script src="animate.js"></script>
+<script>
+    const oBox=document.querySelector(".box")
+    const oStart=document.querySelector(".start")
+    const oStop=document.querySelector(".stop")
+    const obj=new Animate({
+        duration:30,
+        total:5000,
+        begin:{
+            top:100,
+            left:100,
+
+                r:255,g:0,b:0,a:0
+
+        },
+        end:{
+            top:300,
+            left: 500,
+            width:100,height:100,
+
+                r:255,g:0,b:0,a:1
+
+        },
+        onStart(){
+            console.log("开始")
+
+        },
+        onMove(curData){
+            oBox.style.top=curData.top+"px"
+            oBox.style.left=curData.left+"px";
+            console.log(curData)
+            oBox.style.background=`rgba(${curData.r},${curData.g},${curData.b},${curData.a})`
+
+        },
+        onOver(){
+            console.log("结束")
+
+        }
+    })
+
+    oStart.onclick=function (){
+        console.log(obj)
+        obj.start()
+    }
+    oStop.onclick=function (){
+        obj.stop()
+    }
+
+</script>
+</body>
+</html>

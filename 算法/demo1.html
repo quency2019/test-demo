@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>遍历链表和数组</title>
+</head>
+<body>
+<script>
+
+    function Node(value) {
+        this.value=value;
+        this.next=null
+
+    }
+    var a=new Node("a");
+    var b=new Node("b");
+    var c=new Node("c");
+    var d=new Node("d");
+    a.next=b;
+    b.next=c;
+    c.next=d;
+
+    var arr=[1,2,3,4,5,6]
+
+    function bianArr(arr) {
+        if (!arr) return;
+        for (var i=0;i<arr.length;i++){
+            console.log(arr[i])
+        }
+
+    }
+    function bianli(root) {
+
+        while (true){
+            if(!root){
+                break;
+            }
+            console.log(root.value)
+
+            root=root.next
+        }
+
+    }
+    bianli(a)
+    bianArr(arr)
+</script>
+</body>
+</html>

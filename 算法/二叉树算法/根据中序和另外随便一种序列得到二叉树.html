@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+
+    function Node(value) {
+        this.value=value;
+        this.left=null;
+        this.right=null
+
+    }
+
+    const a=new Node("a")
+    const b=new Node("b")
+    const c=new Node("c")
+    const d=new Node("d")
+    const e=new Node("e")
+    const f=new Node("f");
+    a.left=b;
+    b.left=c;
+    b.right=d;
+    a.right=e;
+    e.left=f;
+
+    //前序遍历abcdef
+    //中序遍历bcdaef
+    function getTree(dlr,ldr) {
+        if (dlr.length!==ldr.length) throw new Error("无效数据");
+
+        if (dlr.length===0) return null;
+        //得到根节点内容
+        const rootValue=dlr[0]
+        // 创建根节点
+        const root=new Node( rootValue)
+
+
+        const index=ldr.indexOf(rootValue);
+
+        const ldrLeft=ldr.slice(0,index);
+        const ldrRight=ldr.slice(index+1);
+
+        const dlrLeft=dlr.slice(1,ldrLeft.length+1);
+
+        const dlrRight=dlr.slice(ldrLeft.length+1);
+
+        root.left=getTree(dlrLeft,ldrLeft);
+
+        root.right=getTree(dlrRight,ldrRight);
+
+        return root
+    }
+    console.log( getTree("abcdef","cbdafe"))
+    console.log( getTree2("abcdef","cbdafe"))
+
+
+    function getTree2(dlr,ldr) {
+        const dlrStr=dlr.split("");
+        const ldrStr=ldr.split("");
+        if (dlrStr.length!==ldrStr.length) throw new Error("无效数据");
+
+        if (dlrStr.length===0) return null;
+        const rootValue=dlrStr[0]
+        // 创建根节点
+        const root=new Node( rootValue)
+
+
+        const index=ldrStr.indexOf(rootValue);
+        const ldrLeft=ldrStr.slice(0,index).join("");
+        const dlrLeft=dlrStr.slice(1,ldrLeft.length+1).join("");
+        root.left=getTree2(dlrLeft,ldrLeft);
+
+        const ldrRight=ldrStr.slice(index+1).join("");
+        const dlrRight=dlrStr.slice(ldrLeft.length+1).join("");
+
+        root.right=getTree2(dlrRight,ldrRight);
+
+
+
+        return root
+    }
+    function LRD(root) {
+        if (!root) return;
+
+        LRD(root.left)
+        LRD(root.right)
+        console.log(root.value)
+    }
+    LRD(getTree2("abcdef","cbdafe"))
+</script>
+</body>
+</html>

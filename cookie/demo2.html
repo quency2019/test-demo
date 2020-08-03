@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<script>
+    var cookie = {
+        /**
+         *
+         * @param name  键
+         * @param val   值
+         * @param date  时间单位天  设置cookie过期时间为一个时间点
+         */
+        setCookie: function (name, val, date) {
+
+            var oDate = new Date();//时间对象
+            oDate.setDate(new Date().getDate() + date);
+            document.cookie = name + "=" + val + "; expires=" + oDate + "; path=/";
+
+
+        },
+        // /**
+        //  *
+        //  * @param name
+        //  * @param val
+        //  * @param date  单位秒
+        //  */
+        // setCookie: function (name, val, date) {
+        //
+        //     document.cookie = name + "=" + val + "; max-age=" + date + "; path=/";
+        //
+        //
+        // },
+        getCookie: function (name) {
+            //name 为想要取到的键值的键名
+
+            var resultArr =document.cookie.split(";");
+            for (var i = 0; i < resultArr.length; i++) {
+                var nameArr = resultArr[i].split("=");
+                if (nameArr[0] == name) {
+                    return nameArr[1];
+                }
+            }
+        },
+        removeCookie: function (name) {
+            //name为想要删除的Cookie的键名
+            this.setCookie(name,"",0)
+        }
+    }
+
+    cookie.setCookie("name","llll",1)
+    cookie.getCookie("name")
+</script>
+</body>
+</html>

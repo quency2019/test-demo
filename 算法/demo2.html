@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>链表递归</title>
+</head>
+<body>
+<script>
+
+    function Node(value) {
+        this.value=value;
+        this.next=null
+
+    }
+    var a=new Node("a");
+    var b=new Node("b");
+    var c=new Node("c");
+    var d=new Node("d");
+    a.next=b;
+    b.next=c;
+    c.next=d;
+
+
+    function bianli(root) {
+        if (!root) return;
+        console.log(root.value)
+        root=root.next
+        bianli(root)
+    }
+    bianli(a)
+</script>
+</body>
+</html>
