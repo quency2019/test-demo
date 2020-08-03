@@ -5,9 +5,9 @@
  *   url: "xxx",
  *   bg: ""
  * }
- * 
+ *
  * 两块内容，图片 + 条目
- * 
+ *
  */
 
 var data = [
@@ -66,85 +66,68 @@ var data = [
         bg: "rgb(178, 195, 211)"
     }
 ];
-var imgs = document.getElementById('imgs');
-var list = document.getElementById('list');
-var activeImg = null;
-var activeItem = null;
-var timer = null;
-
-var imgDoms = [];
-var itemDoms = [];
+let timer=null;
+let oList=document.querySelector(".items");
+let oImg=document.querySelector(".video-imgs");
 
 
-for (var i = 0; i < data.length; i++) {
-    (function (i) {
-        var item = data[i];
-        // 图片逻辑
-        var tagImg = document.createElement('a');
-        imgDoms.push(tagImg);
-        tagImg.setAttribute('href', '#');
-        tagImg.className = 'img';
-        tagImg.style.backgroundImage = 'url(' + item.img + ')';
-        tagImg.style.backgroundColor = item.bg;
-        if (i !== 0) {
-            tagImg.style.display = 'none';
-        } else {
-            activeImg = tagImg;
-        }
-        imgs.appendChild(tagImg);
-        // 标题逻辑
-        var tagItem = document.createElement('a');
-        itemDoms.push(tagItem);
-        if (i == 0) {
-            tagItem.setAttribute('class', 'active');
-            activeItem = tagItem;
-        } else {
-            tagItem.setAttribute('class', 'list-nav');
+
+let obj={
+    itemIndex:0,
+    init(imgDom,itemDom) {
+        this.imgDom=imgDom;
+        this.itemDom=itemDom;
+        this.render()
+
+        timer=setInterval(this.move.bind(this),3000)
+    },
+    render(){
+        let str="";
+        let imgs="";
+        for (let i=0;i<data.length;i++){
+            str+=`<a href="#" class="${i===this.itemIndex?'active':'list-nav'}" title="${data[i].title}：${data[i].desc}">
+                <span>${data[i].title}</span>
+                ${data[i].desc}
+            </a>`
+            imgs+=` <img class="${i===this.itemIndex?'img-active':'img'}" src="${data[i].img}" /> `;
 
         }
-        tagItem.setAttribute('title', item.title + '：' + item.desc);
-        tagItem.innerHTML = "<span>" + item.title + "</span> " + item.desc;
-        tagItem.addEventListener('mouseenter', function () {
-            clearInterval(timer);
-            // 活跃的元素，隐藏或者切换类名
-            activeImg.style.display = 'none';
-            activeItem.className = 'list-nav';
-            // 重新记录新的活跃元素以及图片
-            activeItem = tagItem;
-            activeImg = tagImg;
-            // 活跃元素激活
-            activeImg.style.display = 'block';
-            activeItem.className = 'active';
-        });
-        tagItem.addEventListener('mouseleave', function () {
-            timer = setInterval(move, 2000);
-        });
-        list.appendChild(tagItem);
-    })(i)
-}
+        this.imgDom.innerHTML=imgs;
+        this.itemDom.innerHTML=str;
+        this.bindEvent();
+    },
+    bindEvent(){
+        let btns=document.querySelectorAll(".items a");
+        for (let j=0;j<btns.length;j++){
 
+            btns[j].addEventListener("mouseover", () =>{
+                this.itemIndex=j;
+                timer=null;
+                clearInterval(timer)
+                this.render()
+            })
+            btns[j].addEventListener("mouseleave",()=> {
+                timer=setInterval(this.move.bind(this),3000)
+            })
+        }
 
-// 定时器逻辑
-function move() {
-    // 活跃的元素，隐藏或者切换类名
-    activeImg.style.display = 'none';
-    activeItem.className = 'list-nav';
-    // 找到接下来的活跃图片和item 
-    var index = itemDoms.indexOf(activeItem);
-    console.log(index);
-    if(index == data.length-1) {
-        index = 0;
-    } else {
-        index ++;
+    },
+    move(){
+        if (this.itemIndex>=data.length-1) {
+            this.itemIndex=0;
+
+        }else {
+            this.itemIndex++
+
+        }
+        this.render()
     }
-    var tagItem = itemDoms[index];
-    var tagImg = imgDoms[index];
-    // 重新记录新的活跃元素以及图片
-    activeItem = tagItem;
-    activeImg = tagImg;
-    // 活跃元素激活
-    activeImg.style.display = 'block';
-    activeItem.className = 'active';
 }
+obj.init(oImg,oList)
 
-timer = setInterval(move, 2000);
+
+
+
+
+
+
