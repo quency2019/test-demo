@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <style>
+        .container{
+            display: grid;
+            grid-gap: 5px;
+            grid-template-columns: repeat(auto-fit, minmax(100px,1fr));
+            grid-template-rows: repeat(3, 100px);
+        }
+        .container>div{
+            border: 1px solid #b3effe;
+        }
+        .container>div>img{
+            width: 100%;
+            height: 100% ;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<body>
+<!-- object-fit: cover图片覆盖他的整个容器，，根据需要，浏览器进行裁剪-->
+<div class="container">
+    <div><img src="01.jpeg" /> </div>
+    <div><img src="01.jpeg" /> </div>
+    <div><img src="01.jpeg" /> </div>
+    <div><img src="01.jpeg" /> </div>
+    <div><img src="01.jpeg" /> </div>
+    <div><img src="01.jpeg" /> </div>
+</div>
+<div>sdddd</div>
+</body>
+</html>
