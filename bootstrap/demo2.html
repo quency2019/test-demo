@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.0/dist/css/bootstrap.min.css" integrity="sha384-9aIt2nRpC12Uk9gS9baDl411NQApFmC26EwAOH8WgZl5MYYxFfc+NcPb1dKGj7Sk" crossorigin="anonymous">
+    <style>
+        .row div{
+            background-color: lightcoral;
+            border: 1px solid lightblue;
+            height: 100px;}
+        .v-align{
+            height: 100px;
+            background-color: rgba(255,0,0,.1);
+            margin: 10px -15px;
+        }
+        .v-align div{
+            height: 40px;
+            line-height: 40px;
+            background-color: rgba(86,61,124,.15);
+            border: 1px solid rgba(86,61,124,.2);
+            color: #333;
+
+        }
+    </style>
+</head>
+<body>
+<div class="container">
+    <div class="row v-align align-items-start">
+        <div class="col">start</div>
+        <div class="col">start</div>
+        <div class="col">start</div>
+    </div>
+    <div class="row v-align align-items-center">
+        <div class="col">start</div>
+        <div class="col">start</div>
+        <div class="col">start</div>
+    </div>
+    <div class="row v-align align-items-end">
+        <div class="col">start</div>
+        <div class="col">start</div>
+        <div class="col">start</div>
+    </div>
+    <div class="row v-align ">
+        <div class="col">start</div>
+        <div class="col align-self-end">start</div>
+        <div class="col">start</div>
+    </div>
+
+
+    <div class="row v-align justify-content-start">
+        <div class="col-2">justify-content-start</div>
+        <div class="col-2">justify-content-start</div>
+        <div class="col-2">justify-content-start</div>
+    </div>
+    <div class="row v-align justify-content-center">
+        <div class="col-2">justify-content-center</div>
+        <div class="col-2">justify-content-center</div>
+        <div class="col-2">justify-content-center</div>
+    </div>
+    <div class="row v-align justify-content-end">
+        <div class="col-2">justify-content-end</div>
+        <div class="col-2">justify-content-end</div>
+        <div class="col-2">justify-content-end</div>
+    </div>
+    <div class="row v-align justify-content-around">
+        <div class="col-2">around</div>
+        <div class="col-2">around</div>
+        <div class="col-2">around</div>
+    </div>
+    <div class="row v-align justify-content-between">
+        <div class="col-2">between</div>
+        <div class="col-2">between</div>
+        <div class="col-2">between</div>
+    </div>
+</div>
+
+
+
+</body>
+</html>

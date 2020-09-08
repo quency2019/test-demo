@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<!-- 点击提交按钮后，页面不会重载 -->
+<div id="app">
+    <form v-on:submit.prevent="onSubmit">
+        <input type="submit">
+    </form>
+    <!-- 也可以只有修饰符 -->
+    <form >
+        <input type="submit">
+    </form>
+</div>
+
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js" ></script>
+<script>
+    const vm=new Vue({
+        el:"#app",
+
+
+        methods: {
+            alert(str) { alert(str) },
+
+                onSubmit() { console.log('submit'); }
+
+
+        }
+    })
+
+</script>
+</body>
+</html>

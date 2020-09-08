@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<script>
+    const windowToCanvas = (canvas, x, y) => {
+        let rect = canvas.getBoundingClientRect()
+        return {
+            x: x - rect.left * (canvas.width/rect.width),
+            y: y - rect.top * (canvas.height/rect.height)
+        }
+    }
+    window.onload = (function(){
+        const canvas=document.createElement("canvas");
+        const body=document.getElementsByTagName("body")[0];
+        canvas.width = 600;
+        canvas.height = 400;
+        body.appendChild(canvas);
+        const imgBg = new Image();
+        imgBg.src = ''
+        body.appendChild(imgBg);
+        const ctx=canvas.getContext("2d");
+        let isAllowDrawLine = false
+        canvas.onmousedown=(e)=>{
+            isAllowDrawLine = true
+            // const startX=e.offsetX;
+            // const startY=e.offsetY;
+            // ctx.moveTo(startX,startY)
+            // ctx.lineWidth=1;
+            //获得鼠标按下的点相对canvas的坐标。
+            let ele = windowToCanvas(canvas, e.clientX, e.clientY)
+            //es6的解构赋值
+            let { x, y } = ele
+            //绘制起点。
+            ctx.moveTo(x, y)
+            canvas.onmousemove = (e) => {
+                //移动时获取新的坐标位置，用lineTo记录当前的坐标，然后stroke绘制上一个点到当前点的路径
+                if (isAllowDrawLine) {
+                    let ele = windowToCanvas(canvas, e.clientX, e.clientY)
+                    let { x, y } = ele
+                    ctx.lineTo(x, y)
+                    ctx.stroke()
+                }
+            }
+            canvas.onmouseup = function() {
+                isAllowDrawLine = false;
+                ctx.drawImage(imgBg,130,50);
+                // ctx.fillText("canvas生成图片测试",100,30);
+                // ctx.fillText("长按保存到手机",120,120);
+                //生成的data的路径,可以通过php生成图片存到数据库,单存data路径不合适,高清图片情况下会出现图片的残缺
+                const srccc = canvas.toDataURL("image/png");
+                imgBg.src=srccc;
+
+            }
+        }
+    })()
+
+</script>
+</body>
+</html>

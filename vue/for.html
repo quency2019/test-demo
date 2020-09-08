@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <template v-for="(item,index) in datas">
+        <li >{{item}}</li>
+        <button @click="handleClick(index)">下移</button>
+    </template>
+
+    <input v-model="num"/>
+    <div v-if="num>=90">优秀</div>
+    <div v-else-if="num>=60">及格</div>
+    <div v-else>不及格</div>
+</div>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js" ></script>
+<script>
+const vm=new Vue({
+    el:"#app",
+    data:{
+        datas:["aaa","bbb","ccc"],
+        num:80
+    },
+    methods: {
+        handleClick (index) {
+            const deleteItem = this.datas.splice(index, 1);
+            this.datas.splice(index + 1, 0, ...deleteItem);
+        }
+    }
+})
+</script>
+</body>
+</html>

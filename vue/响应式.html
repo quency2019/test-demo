@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app"><p v-text="num"></p>
+    <button v-on:click="onChange(1)">加一</button>
+    <button v-on:click="onChange(-1,$event)">减一</button>
+    <div v-bind:text-content.prop="text"></div>
+    <svg :view-box.camel="viewbox"></svg>
+
+</div>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js" ></script>
+<script>
+    const vm=new Vue({
+        el:"#app",
+        data:{
+            mrDeng: '风姿绰约、花枝招展',
+            dengFamily: ['邓哥', '小刘', '王小宝'],
+            num:1,
+            text:5,
+            viewbox:"0 0 100 100"
+        },
+
+        methods:{
+            onChange(num,e){
+                console.log(e.target)
+                this.num=this.num+num
+            }
+
+        }
+    })
+    vm.mrDeng = '手如柔荑、肤如凝脂'
+    // // 1. 使用vm.$nextTick
+    // vm.$nextTick(() => {
+    //     console.log(vm.$el.innerHTML); // 杉杉超美的
+    // })
+    // // 2. 使用Vue.nextTick
+    // Vue.nextTick(() => {
+    //     console.log(vm.$el.innerHTML); // 杉杉超美的
+    // })
+</script>
+</body>
+</html>

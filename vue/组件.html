@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div id="app">
+    <video-item
+            title="羊村摇"
+            poster="https://developer.duyiedu.com/bz/video/955bac93ccb7f240d25a79b2ff6a9fdbda9537bc.jpg@320w_200h.webp"
+            play="638000"
+            rank="1207"
+    ></video-item>
+</div>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js" ></script>
+<script>
+    Vue.component('video-item', {
+        props: ['title', 'poster', 'play', 'rank'],
+        template: `<div>{{ title }}</div>`
+    })
+</script>
+</body>
+</html>
