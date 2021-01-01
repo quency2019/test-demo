@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<canvas width="600" height="220"></canvas>
+<script>
+
+    const can=document.querySelector("canvas");
+    const ctx=can.getContext("2d");
+    const img=new Image()
+    img.src="../cases_img02.jpg";
+
+    img.onload=function () {
+        var canvasTemp = document.createElement('canvas');
+        var contextTemp = canvasTemp.getContext('2d');
+        canvasTemp.width = 600; // 目标宽度
+        canvasTemp.height = 220; // 目标高度
+        contextTemp.drawImage(this,0,0,600,220)
+        var ptn = ctx.createPattern(canvasTemp,'no-repeat')
+        ctx.fillStyle = ptn;
+        ctx.fillRect(0,0,600,260);
+
+    }
+</script>
+</body>
+</html>
