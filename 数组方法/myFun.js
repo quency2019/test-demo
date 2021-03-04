@@ -8,6 +8,8 @@
  */
 Array.prototype.myForEach=function (cb) {
     //this =》 arr
+    console.log('arguments', arguments)
+    console.log('this',this)
     var obj=arguments[1]?arguments[1]:window
     for (var i=0;i<this.length;i++) {
 

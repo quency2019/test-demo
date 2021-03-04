@@ -1,0 +1,307 @@
+
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf8" />
+<title>轮播图</title>
+
+<!-- <link href="/Public/assets/home/css/swiper-bundle.min.css"  rel="stylesheet" type="text/css" /> -->
+
+<script type="text/javascript" src="./js/jquery.min.js"></script>
+<style>
+    ul li{
+        padding: 0;
+        margin: 0;
+    }
+    li{
+        list-style: none;
+    }
+  .body{
+      width: 1000px;
+      margin: 0 auto;;
+    background: url(./img/word-bg.jpg) no-repeat center top;
+  }
+ 
+  .img-box{
+    width: 100%;
+    height: 440px;
+    position: relative;
+  }
+  .img-box li{
+    transform: translateX(100px) scale(.6);
+    z-index: 979;
+    opacity: 1;
+    transition-duration: .5s;
+    width: 666px;
+    height: 333px;
+    position: absolute;
+    top: 40px;
+    left: 0;
+    box-shadow: 0 8px 30px #ddd;
+    background-color: rgba(0, 0, 0, 1);
+  }
+  .img-box li img{
+    width: 100%;
+    z-index: -1;
+    opacity:0.6; filter: alpha(opacity=60);
+  }
+  .img-box li.on img{
+    opacity:1; filter: alpha(opacity=100);
+  }
+  .img-box li.on{
+    transform: translateX(165px) scale(1);
+    z-index: 30;
+    opacity: 1;
+    transition-duration: 0ms;
+    
+   
+  }
+
+  .img-box li.left-on{
+    transform: translateX(-55px) scale(.8);
+    z-index: 20;
+    
+  }
+  .img-box li.left-left-on{
+    transform: translateX(0) scale(.2);
+    z-index: 10;
+    
+  }
+  .img-box li.right-on{
+    transform: translateX(385px) scale(.8);
+    z-index: 20;
+    
+  }
+  .img-box li.right-right-on{
+    transform: translateX(200px) scale(.2);
+    
+    z-index: 10;
+  }
+  .point-box{
+    width: 1000px;
+    margin: 30px auto;
+    height: 104px;
+    overflow: hidden;
+   
+    position: relative;
+    box-sizing: border-box;
+
+  }
+  
+  .point-box .box-ul{
+    width: 800px;
+    position: absolute;
+    left: 100px;
+    overflow: hidden;
+
+  }
+  .point-box .box-ul ul{
+    width: 1885px;
+
+  }
+  .point-box ul li{
+    float: left;
+    width: 250px;
+    margin-right: 15px;
+    box-sizing: border-box;
+    
+    overflow: hidden;
+  }
+  .point-box ul li img{
+    border: 2px solid #ddd;
+  }
+  .point-box ul li{
+    float: left;
+    
+  }
+  .point-box ul li.on img{border: 2px solid #0e4497;}
+  .prv{
+    position: absolute;
+    left: 24px;
+    top: 27px;
+    width: 40px;
+    height: 40px;
+    background-image: url(./img/prv.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  .next{
+    width: 40px;
+    height: 40px;
+    position: absolute;
+    right:  24px;
+    top: 27px;
+    background-image: url(./img/next.jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+  }
+  
+  
+</style>
+</head>
+<body>
+
+
+<div class="body">
+   
+    <div class="aboutMain png">
+      <div class="img-box">
+        <li class="left-on"><img src="./img/word05.jpg" alt="企业荣誉"></li>
+        <li class="on" ><img src="./img/word01.jpg" alt="企业荣誉"></li>
+        <li class="right-on"><img src="./img/word02.jpg" alt="企业荣誉"></li>
+        <li class="right-right-on"><img src="./img/word03.jpg" alt="企业荣誉"></li>
+        <li class="left-left-on"><img src="./img/word04.jpg" alt="企业荣誉"></li>
+
+      </div>
+      
+    
+    
+  </div>
+
+</div>
+<div class="point-box">
+  <div class="box-ul">
+    <ul>
+      <li class="" data-index="4"><img src="./img/about-word03.png" alt="企业教育"></li>
+
+      <li class="on" data-index="0"><img src="./img/about-word01.png" alt="企业荣誉"></li>
+      <li class="" data-index="1"><img src="./img/about-word02.png" alt="企业文化"></li>
+      <li class="" data-index="2"><img src="./img/about-word03.png" alt="企业教育"></li>
+      <li class="" data-index="3"><img src="./img/about-word04.jpg" alt="企业教育"></li>
+      <li class="" data-index="4"><img src="./img/about-word05.jpg" alt="企业教育"></li>
+      <li class="" data-index="0"><img src="./img/about-word01.png" alt="企业教育"></li>
+    </ul>
+  </div>
+  
+  <div class="prv"></div>
+  <div class="next"></div>
+  </div>
+</div>
+<script type="text/javascript">
+$(function(){
+	$(".nav li").eq(1).children().addClass("hover");
+	$(".aboutCul ul li").eq(0).show();
+	$(".aboutCul .number span").eq(0).addClass("on");
+	var sw = 1;
+	$(".aboutCul .number span").mouseover(function(){
+		sw = $(".number span").index(this);
+		myShow(sw);
+	});
+	function myShow(i){
+		$(".aboutCul .number span").eq(i).addClass("on").siblings("span").removeClass("on");
+		$(".aboutCul ul li").eq(i).show().siblings("li").hide();
+	}
+	//滑入停止动画，滑出开始动画
+	$(".aboutCul").hover(function(){
+		if(myTime){
+		   clearInterval(myTime);
+		}
+	},function(){
+		myTime = setInterval(function(){
+		  myShow(sw)
+		  sw++;
+		  if(sw==4){sw=0;}
+		} , 5000);
+	});
+	//自动开始
+	var myTime = setInterval(function(){
+	   myShow(sw)
+	   sw++;
+	   if(sw==4){sw=0;}
+	} , 5000);
+
+	$(".honorFloat").stop().animate({left:0,opacity:1},800,function(){
+		$(".aboutBoxShow").stop().fadeIn(500);	
+		$(".aboutMainR .float").stop().fadeIn(800);	
+	});
+	$(".aboutBoxShow").stop().animate({left:0,opacity:1},800);
+	$(".aboutDev").stop().animate({top:0,opacity:1},800);
+	$(".aboutMainR .img").stop().animate({top:0,opacity:1},800,function(){
+        $(".more-box").hover(function(){
+          $(this).find("img").stop().animate({top:-28},500);
+        },function(){
+          $(this).find("img").stop().animate({top:0},500);
+        });
+         $(".more-box-on").hover(function(){
+          $(this).find("img").stop().animate({top:0},500);
+        },function(){
+          $(this).find("img").stop().animate({top:-28},500);
+        });
+    });
+
+    let index=0;
+    
+    let lis=$(".img-box li")
+    let plis=$(".point-box li")
+    let ul=$(".point-box .box-ul ul")
+    let prv=$(".prv")
+    let next=$(".next")
+
+    prv.click((e)=>{
+      console.log('tag', e)
+      index--
+      console.log('index', index)
+      if(index<0){
+        index=4
+      }
+      render(index)
+
+    })
+    next.click((e)=>{
+      console.log('tag', e)
+      index++
+      if(index>4){
+        index=0
+      }
+      
+      render(index)
+
+    })
+
+    function render(index){
+      console.log('tag', index)
+      plis.eq(index+1).siblings().removeClass("on")
+      plis.eq(index+1).addClass("on")
+      let mLeft=-265*index
+      console.log('tag', ul)
+      ul.animate({
+        "margin-left":mLeft+"px"
+      })
+      lis.eq(index).siblings().removeClass("on").removeClass("left-on").removeClass("left-left-on")
+      .removeClass("right-on").removeClass("right-right-on")
+      lis.eq(returnN(index+1)).attr("class","on")
+      lis.eq(returnN(index)).attr("class","left-on")
+      lis.eq(returnN(index-1)).attr("class","left-left-on")
+      lis.eq(returnN(index+3)).attr("class","right-right-on")
+      lis.eq(returnN(index+2)).attr("class","right-on")
+      
+    }
+    function returnN(index){
+      console.log(index, '')
+      if(index>4){
+        index-=5
+      }
+      if(index<0){
+        index+=5
+      }
+
+      return index
+    }
+
+    lis.click(function(e){
+      console.log('tag',  e.target.datalist.index)
+     
+
+
+    })
+})
+</script>
+<script>
+ 
+</script>
+
+<include file="Index/footer"/>
+
+
+</body>
+</html>
