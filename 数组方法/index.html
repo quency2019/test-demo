@@ -12,6 +12,8 @@
 <script>
     const s="a=1223;b=555;c=666"
 
+
+
     const arr1=[1,2,3,4,5,6]
     arr1.myForEach((item)=>{
         console.log('item', item)
@@ -21,15 +23,21 @@
 
     }
 
-    const result=arr1.myReduce(demo)
+    const result=arr1.myMap((item,index)=>{
+        return item
+        
+    },obj)
+    console.log('result', result)
+    console.log('obj', obj)
+    // const result=arr1.myReduce(demo)
 
 
-    function demo(prevValue,item,index,arr){
-        prevValue+=item
-        return prevValue
+    // function demo(prevValue,item,index,arr){
+    //     prevValue+=item
+    //     return prevValue
 
-    }
-    console.log(result)
+    // }
+    // console.log(result)
 
 
 

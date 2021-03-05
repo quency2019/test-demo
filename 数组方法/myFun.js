@@ -48,6 +48,7 @@ Array.prototype.myMap=function (cb){
     for (var i=0;i<this.length;i++) {
 
         var result= cb.apply(obj,[this[i],i,this]);
+        console.log('tag', result)
 
             arr.push(result)
 
