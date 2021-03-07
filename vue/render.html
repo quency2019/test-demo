@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Title</title>
+</head>
+
+<body>
+  <!-- 点击提交按钮后，页面不会重载 -->
+  <div id="app">
+
+  </div>
+
+  <script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+  <script>
+    const vm = new Vue({
+      el: "#app",
+      data: {
+        arr: [1, 2, 3]
+      },
+      render(h) {
+        let content = this.arr.map(item => {
+          return h(`h${item}`, `value h${item}`)
+        })
+
+
+        return h("div", content)
+
+
+
+      },
+
+
+
+    })
+
+  </script>
+</body>
+
+</html>
