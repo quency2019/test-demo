@@ -11,6 +11,7 @@ this.myPlugin.debounce = function (callback, time) {
         clearTimeout(timer)
         timer=setTimeout(()=>{
             callback.apply(null,arguments)
+            console.log('arguments', arguments)
         },time)
     }
 
@@ -32,7 +33,9 @@ this.myPlugin.throttle = function (callback, time, immediately) {
                 // 第一次 获取时间超过time 允许触发事件
                 t=Date.now()// 更新t
                 callback.apply(null,arguments)//函数运行
+                
             }
+            console.log('arguments', arguments)
 
 
 
@@ -45,6 +48,7 @@ this.myPlugin.throttle = function (callback, time, immediately) {
                 callback.apply(null,arguments)//函数运行
                 timer = null;//清楚timer
                 clearTimeout(timer)
+                console.log('arguments', arguments)
             },time)
         }
     }
