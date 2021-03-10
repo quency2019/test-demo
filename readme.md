@@ -79,6 +79,37 @@ new  》 bind 》调用
         obj2.print()
         // "a" this指向obj2
 ```
+
+``` javascript 
+ var number = 10;
+    function fn() {
+      console.log("number:" + this.number)
+    }
+    var obj = {
+      number: 2,
+      show: function () {
+        this.number = 3;
+        // 只跟函数声明时候的环境有关
+        fn();
+        // console.log(arguments[0])
+        // this 指向 arguments 本身
+        arguments[0]()
+      },
+      show2: function () {
+        (function () {
+          // 立即执行函数 this指向window 对象
+          console.log(this.number);
+          this.number = 7
+        })()
+
+      }
+    }
+    obj.show(fn);
+    obj.show2();
+    console.log(number)
+
+```
+![typeof](./testdemo/img/this.png)
 # == 和 ===
 null==undefined  ture
 ==类型
