@@ -7,18 +7,21 @@
     <Comp></Comp>
     <div>{{ sum }}</div>
     <button @click="add">add</button>
+    <input v-focus="true" />
     <router-link to="/page1">link page1</router-link>
     <router-link to="/page2">link page2</router-link>
     <router-view></router-view>
+    <My-Loading  v-show="show"></My-Loading>
   </div>
 </template>
 
 <script>
 import HelloWorld from "./components/HelloWorld.vue";
 import Comp from "./components/comp.vue";
-
+import mixin from "./plugin/mixin"
 export default {
   name: "App",
+  mixins:[mixin],
   components: {
     HelloWorld,
     Comp,
@@ -28,10 +31,19 @@ export default {
       value: "",
       init: "初始值",
       sum: "",
+      show:true
     };
   },
   mounted() {
     this.sum = this.$store.getters.sum;
+this.$toast("你好呀",20000)
+    console.log('this',this.Globaldata)
+
+    setTimeout(()=>{
+      this.show= false
+
+
+    },1000)
 
     // console.log(this.$refs);
     // console.log(this.$children, "children");

@@ -58,3 +58,20 @@ this.Demo.deepClone=(obj)=>{
 
 }
 this.Demo.deepClone2=(obj)=>JSON.parse(JSON.stringify(obj))
+
+
+// 数组去重
+
+this.Demo.changeArr=(arr)=>{
+    if(!Array.isArray(arr)) return
+   
+    let result = [];
+    for (let i = 0; i < arr.length; i++) {
+        if(result.indexOf(arr[i]) === -1){
+            result.push(arr[i]);
+        }
+    }
+    return result;
+
+
+}
