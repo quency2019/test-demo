@@ -785,3 +785,188 @@ export const findAndReplace=(string,wordToFind,wordToReplace)=>{
 // 移除数组中的false值，包括false，undefined， NaN和empty。
 export const removeFalseValues=arr=>arr.filter(item=>item)
 
+// 浏览器窗口可视区域大小（不包括工具栏和滚动条等边线）
+// 1600 * 525
+export const  client_w = document.documentElement.clientWidth || document.body.clientWidth;
+export const  client_h = document.documentElement.clientHeight || document.body.clientHeight;
+ 
+// 网页内容实际宽高（包括工具栏和滚动条等边线）
+// 1600 * 8
+export const  scroll_w = document.documentElement.scrollWidth || document.body.scrollWidth;
+export const  scroll_h = document.documentElement.scrollHeight || document.body.scrollHeight;
+ 
+// 网页内容实际宽高 (不包括工具栏和滚动条等边线）
+// 1600 * 8
+export const  offset_w = document.documentElement.offsetWidth || document.body.offsetWidth;
+export const  offset_h = document.documentElement.offsetHeight || document.body.offsetHeight;
+ 
+// 滚动的高度
+var scroll_Top = document.documentElement.scrollTop||document.body.scrollTop;
+
+export const clientHeight=function () {
+    var clientHeight = 0;
+    if (document.body.clientHeight && document.documentElement.clientHeight) {
+        var clientHeight = (document.body.clientHeight < document.documentElement.clientHeight) ? document.body.clientHeight : document.documentElement.clientHeight;
+    }
+    else {
+        var clientHeight = (document.body.clientHeight > document.documentElement.clientHeight) ? document.body.clientHeight : document.documentElement.clientHeight;
+    }
+    return clientHeight;
+}
+
+//获取当前元素中的第一个子元素
+function getFirstElement(element) {
+    if(element.firstElementChild){
+        return element.firstElementChild;
+    }else{
+        var node = element.firstChild;
+        while(node && node.nodeType!=1){
+            node = node.nextSibling;
+        }
+        return node;
+    }}
+
+    
+//获取当前元素中的样式
+export const getStyle= function (ele, attr) {
+        if (window.getComputedStyle) {
+            return window.getComputedStyle(ele, null)[attr];
+        }
+        return ele.currentStyle[attr];
+    }
+  
+
+ 
+
+//    mouseover和mouseout 事件才包含的获取相关元素的方法
+
+export const getRelatedTarget= function(event){
+    if (event.relatedTarget){
+     return event.relatedTarget;
+    } else if (event.toElement){
+     return event.toElement;
+    } else if (event.fromElement){
+     return event.fromElement;
+    } else {
+     return null;
+    }
+   }
+
+//    鼠标滚轮判断
+
+// 对于mousedown 和mouseup 事件来说，则在其event 对象存在一个button 属性，
+// 表示按下或释放的按钮。DOM的button 属性可能有如下3 个值：0 表示主鼠标按钮，1 表示中间的鼠
+// 标按钮（鼠标滚轮按钮），2 表示次鼠标按钮。在常规的设置中，主鼠标按钮就是鼠标左键，而次鼠标
+// 按钮就是鼠标右键。
+// IE8 及之前版本也提供了button 属性，但这个属性的值与DOM 的button 属性有很大差异。
+//  0：表示没有按下按钮。
+//  1：表示按下了主鼠标按钮。
+//  2：表示按下了次鼠标按钮。
+//  3：表示同时按下了主、次鼠标按钮。
+//  4：表示按下了中间的鼠标按钮。
+//  5：表示同时按下了主鼠标按钮和中间的鼠标按钮。
+//  6：表示同时按下了次鼠标按钮和中间的鼠标按钮。
+//  7：表示同时按下了三个鼠标按钮。
+
+export const getButton=function(event){
+    if (document.implementation.hasFeature("MouseEvents", "2.0")){
+     return event.button;
+    } else {
+     switch(event.button){
+      case 0:
+      case 1:
+      case 3:
+      case 5:
+      case 7:
+      return 0;
+      case 2:
+      case 6:
+      return 2;
+      case 4:
+      return 1;
+     }
+    }
+   }
+
+//    访问剪贴板中的数据
+
+export const getClipboardText=function(event){
+    var clipboardData = (event.clipboardData || window.clipboardData);
+    return clipboardData.getData("text");
+   }
+
+//    设置剪贴板中的数据
+export const setClipboardText= function(event, value){
+    if (event.clipboardData){
+     return event.clipboardData.setData("text/plain", value);
+    } else if (window.clipboardData){
+     return window.clipboardData.setData("text", value);
+    }
+   }
+
+ export let event = {
+    // event兼容
+    getEvent: function(event) {
+      return event ? event : window.event;
+    },
+   
+    // type兼容
+    getType: function(event) {
+      return event.type;
+    },
+   
+    // target兼容
+    getTarget: function(event) {
+      return event.target ? event.target : event.srcelem;
+    },
+   
+    // 添加事件句柄
+    addHandler: function(elem, type, listener) {
+      if (elem.addEventListener) {
+        elem.addEventListener(type, listener, false);
+      } else if (elem.attachEvent) {
+        elem.attachEvent('on' + type, listener);
+      } else {
+        // 在这里由于.与'on'字符串不能链接，只能用 []
+        elem['on' + type] = listener;
+      }
+    },
+   
+    // 移除事件句柄
+    removeHandler: function(elem, type, listener) {
+      if (elem.removeEventListener) {
+        elem.removeEventListener(type, listener, false);
+      } else if (elem.detachEvent) {
+        elem.detachEvent('on' + type, listener);
+      } else {
+        elem['on' + type] = null;
+      }
+    },
+   
+    // 添加事件代理
+    addAgent: function (elem, type, agent, listener) {
+      elem.addEventListener(type, function (e) {
+        if (e.target.matches(agent)) {
+          listener.call(e.target, e); // this 指向 e.target
+        }
+      });
+    },
+   
+    // 取消默认行为
+    preventDefault: function(event) {
+      if (event.preventDefault) {
+        event.preventDefault();
+      } else {
+        event.returnValue = false;
+      }
+    },
+   
+    // 阻止事件冒泡
+    stopPropagation: function(event) {
+      if (event.stopPropagation) {
+        event.stopPropagation();
+      } else {
+        event.cancelBubble = true;
+      }
+    }
+  };

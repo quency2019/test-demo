@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+    .top-btn {
+            display: none;
+            width: 4.4rem;
+            height: 4.4rem;
+            line-height: 4.4rem;
+            text-align: center;
+            background-color: #ffcc57;
+            border-radius: 50%;
+
+            font-size: 16px;
+            position: fixed;
+            top: 50%;
+            right: 15px;
+            z-index: 999;
+            cursor: pointer;
+
+            transition-duration: 1s;
+            opacity: 0.85;
+            box-shadow: 0 0 3px #bda4a4;
+        }
+
+        .top-btn i {
+            color: #fff;
+
+        }
+
+
+    .top-btn {
+        display: none;
+    }
+
+    .upload-btn:hover {
+        right: 4%;
+        background-color: rgba(0, 0, 0, .8);
+        padding: 2px 6px
+    }
+
+
+    .upload-btn i {
+        font-size: 24px;
+        color: #fff;
+        display: none;
+    }
+
+    .upload-btn:hover i {
+        display: inline-block;
+    }
+
+    .upload-btn .title {
+        color: #fff;
+        margin: 0;
+
+    }
+    .bg{
+        height: 6000px;
+        background-color: lightcoral;
+    }
+    </style>
+</head>
+<body>
+    <div class="bg"></div>
+    <div class="top-btn" title="置顶">
+        <i class="iconfont">置顶</i>
+    </div>
+    <script>
+
+let timer = null;    
+    let isTop = true;
+        //滚动条滚动时触发
+    window.onscroll = function () {
+        if ((document.documentElement.scrollTop + document.body.scrollTop > 100) && (document.body.clientWidth <= 786)) {
+            document.getElementsByClassName("top-btn")[0].style.display = "block";
+        }
+        else {
+            document.getElementsByClassName("top-btn")[0].style.display = "none";
+
+        }
+      
+        if(!isTop){                //若滚动条未到达顶部则继续执行定时器
+                 clearInterval(timer);
+             }
+             isTop = false;
+     
+
+    }
+
+//置顶按钮事件
+    document.getElementsByClassName("top-btn")[0].addEventListener("click", function (e) {
+            // e.preventDefault();
+            // document.documentElement.scrollTop = 0
+            timer = setInterval(function(){
+                 var osTop = document.documentElement.scrollTop || document.body.scrollTop;
+                 var ispeed = Math.floor(-osTop/6);        //使向上滚动呈现渐变效果
+                 document.documentElement.scrollTop = document.body.scrollTop = (osTop+ispeed);
+                 isTop = true;
+ 
+                 if( osTop == 0){     //如果滚动条已经到达浏览器顶部则暂定滚动
+                     clearInterval(timer);
+                 }
+             },30)
+        }
+        )
+    </script>
+</body>
+</html>
