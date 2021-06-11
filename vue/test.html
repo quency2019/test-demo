@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <!-- 点击提交按钮后，页面不会重载 -->
+  <div id="app">
+    <div @click="handle">
+    点击
+    <li data-num="21">li</li>
+
+    </div>
+</div>
+<script src="https://cdn.staticfile.org/vue/2.2.2/vue.min.js"></script>
+<script>
+  const vm = new Vue({
+    el: "#app",
+    data: {
+      arr: [1, 2, 3]
+    },
+    methods: {
+        handle(e){
+            console.log(e.target.getAttribute('data-num'))
+
+        }
+    },
+
+
+
+  })
+
+</script>
+</body>
+</html>

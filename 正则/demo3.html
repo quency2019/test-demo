@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <script>
+        let str="ssdd 7890"
+        str.replace(/\b\s([0-9])([0-9])([0-9])([0-9])/g,(item,$1,$2,$3,$4)=>{
+            console.log('$1,$2,$3,$4,$5',$1,$2,$3,$4)
+            let str1=item.split(" ")[0];
+            let str2=rank($1)
+            let str3=size($2)
+            let str4=generation($3)
+            let str5=configuration($4)
+
+            console.log('简介', str1+str2+str3+str4+str5)
+            
+        
+        })
+
+        // 判断等级
+        function rank(num){
+            if(num==3){
+                return "低端型号"
+            }
+            if(num==5){
+                return "中端型号"
+            }
+            if(num==7||num==9){
+                return "高端型号"
+            }
+
+        }
+        // 判断是台式还是   笔记本屏幕大小
+        function size(num){
+            if(num==0){
+                return "台式机"
+            }
+            if(num==1){
+                return "笔记本11寸屏大小"
+            }
+            if(num==2){
+                return "笔记本12寸屏大小"
+            }
+            if(num==3){
+                return "笔记本13寸屏大小"
+            }
+            if(num==4){
+                return "笔记本14寸屏大小"
+            }
+            if(num==5){
+                return "笔记本15寸屏大小"
+            }
+            if(num==6){
+                return "笔记本16寸屏大小"
+            }
+            if(num==7){
+                return "笔记本17寸屏大小"
+            }
+            if(num==8){
+                return "笔记本18寸屏大小"
+            }
+            if(num==9){
+                return "笔记本19寸屏大小"
+            }
+            
+
+        }
+        function generation(num){
+            if(num==0){
+                return "台式机"
+            }
+            if(num==1){
+                return "第一代"
+            }
+            if(num==2){
+                return "第二代"
+            }
+            if(num==3){
+                return "第三代"
+            }
+            if(num==4){
+                return "第四代"
+            }
+            if(num==5){
+                return "第五代"
+            }
+            if(num==6){
+                return "第六代"
+            }
+            if(num==7){
+                return "第七代"
+            }
+            if(num==8){
+                return "第八代"
+            }
+            if(num==9){
+                return "第九代"
+            }
+            
+
+        }
+        function configuration(num){
+            if(num==0){
+                return "标准配置"
+            }
+            if(num==1){
+                return "特殊变体"
+            }
+            if(num==2){
+                return ""
+            }
+            if(num==3){
+                return ""
+            }
+            if(num==4){
+                return "坚固耐用"
+            }
+            if(num==5){
+                return "2-in1 设备"
+            }
+            if(num==6){
+                return ""
+            }
+            if(num==7){
+                return ""
+            }
+            if(num==8){
+                return ""
+            }
+            if(num==9){
+                return ""
+            }
+            
+
+        }
+    </script>
+</body>
+</html>

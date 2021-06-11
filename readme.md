@@ -20,13 +20,13 @@
 
 ## instanceof
 能判断引用类型，不能判断原始类型，内部机制是通过原型链来判断的
-![typeof](./testdemo/img/instanceof.png)
+![instanceof](./testdemo/img/instanceof.png)
 
 ## Object.prototype.toString.call
 可以识别基本类型以及引用对象类型
 不能识别自定义对象类型
 
-![typeof](./testdemo/img/Object.prototype.toString.call.png)
+![Object.prototype.toString.call](./testdemo/img/Object.prototype.toString.call.png)
 
 ## constructor
 null或者undefined，没有构造函数
@@ -38,7 +38,7 @@ function getConstructorName(obj){
 }
 ```
 
-![typeof](./testdemo/img/constructor.png)
+![constructor](./testdemo/img/constructor.png)
 
 
 # 类型转换
@@ -46,11 +46,11 @@ function getConstructorName(obj){
 * 转成布尔值:除了 undefined，null， false， NaN， ''， 0， -0，其他所有值都转为 true，包括所有对象
 * 转成字符串
 * 转成数字
-![typeof](./testdemo/img/type.png)
+![type](./testdemo/img/type.png)
 
 
 * 转成字符串
-![typeof](./testdemo/img/String.png)
+![String](./testdemo/img/String.png)
 
 
 # this
@@ -109,7 +109,7 @@ new  》 bind 》调用
     console.log(number)
 
 ```
-![typeof](./testdemo/img/this.png)
+![this](./testdemo/img/this.png)
 # == 和 ===
 null==undefined  ture
 ==类型
@@ -177,8 +177,7 @@ null==undefined  ture
 # 原型继承和 Class 继承 
 需要配合练习题和视频
 
-# 实现一个简洁版的promise 
-手写
+
 
 # 进程与线程
  * 进程是cpu资源分配的最小单位（是能拥有资源和独立运行的最小单位）
@@ -414,6 +413,17 @@ Active Object：AO，当前正在执行的上下文中的VO
 客户端发送一个标识SYN的数据包给服务器，服务器接收到数据包之后，回一个SYN ACK 标志的数据包给客户端，客户端收到数据报之后，在回一个标识ACK的数据报，然后连接建立。
 
 # 四次挥手
-主动断开方发送一个数据报给
+第一次挥手：主动断开方发送一个数据包给被动断开方，告诉被动断开方我不会主动发送数据给你了，但是我还可以接收数据；
+第二次挥手：被动关闭方收到数据报之后，发送一个数据包给主动断开方，告诉主动关闭方，我已经收到请求，准备断开，
+第三次挥手：被动断开方发送一个数据报给主动关闭方，告诉主动断开方我的数据发送完了，不会再给你发送了；
+第四次挥手：主动关闭方接收到数据之后，发送一个数据报给被动断开方，告诉被动断开方，我收到信息了，你可以断开了
 
+# 减少回流和重绘
+>1.使用`transform` 替代 `top`
+2.使用visibility 替换 display：none
+3.不要把节点的属性值放在一个循环里当成循环里的变量
+4.不要使用 table 布局，可能很小的一个小改动会造成整个 table 的重新布局
+5.动画实现的速度的选择，动画速度越快，回流次数越多，也可以选择使用 requestAnimationFrame
+6.CSS 选择符从右往左匹配查找，避免节点层级过多
+7.将频繁重绘或者回流的节点设置为图层，图层能够阻止该节点的渲染行为影响别的节点。比如对于 video 标签来说，浏览器会自动将该节点变为图层。
 

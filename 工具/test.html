@@ -1,28 +1,36 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
+    <style>
+        .demo{
+            width:100px
+        }
+    </style>
 </head>
+
+
 <body>
-    <script >
-    const findAndReplace=(string,wordToFind,wordToReplace)=>{
-    const res=string.split(wordToFind).join(wordToReplace);
-    return res
-}
-    const result = findAndReplace("i like ba","ba","ma")
-    console.log('result',result)
+    <div style="margin-top: 100px;margin-left:100px;border:2px solid #eee;width:300px;height:300px;position:relative">
+        <div class="demo" style="margin-top: 100px;margin-left:100px;border:1px solid #eee;height:100px;position:absolute">
 
-     const RgbToColor=(r,g,b)=>{
+        </div>
+    </div>
+    
+   
+    <script>
+        let div=document.getElementsByClassName("demo")[0];
+        console.log( window.getComputedStyle(div,null).width)
 
-return ((r<<16)+(g<<8)+b).toString(16).padStart(6,"0")
-
-}
-
-console.log(RgbToColor(255,255,255))
-
+       
+        
+        
     </script>
+
 </body>
+
 </html>

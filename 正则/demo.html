@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+
+
+    <script>
+        let str = "gridSize = {12, 12, 12}, nLocalBoxes = 1728, nHaloBoxes = 1016, nTotalBoxes = 2744, localMin = {0, 0, 0}, localMax = {72.300000000000011, 72.300000000000011, 72.300000000000011}, boxSize = {6.0250000000000012, 6.0250000000000012, 6.0250000000000012}, invBoxSize = {0.1659751037344398, 0.1659751037344398, 0.1659751037344398}, nAtoms = 0x414800"
+
+        let reg = /,(?![^{]*?})/;
+        let newData = str.split(reg);
+        console.log('obj', newData)
+        // str.split(", ").forEach(it=>{
+        //    let arr= it.split(" = ")
+        //    console.log('arr', arr[0])
+        //    obj[arr[0]]=arr[1]
+        // })
+        // console.log('obj', obj)
+    </script>
+
+</body>
+
+</html>
