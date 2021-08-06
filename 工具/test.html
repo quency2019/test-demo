@@ -20,11 +20,50 @@
 
         </div>
     </div>
+
+    <div class="wrap">
+        wrap
+        <div class="content">
+            content
+            <div class="box">
+                box
+            </div>
+        </div>
+    </div>
     
    
     <script>
         let div=document.getElementsByClassName("demo")[0];
         console.log( window.getComputedStyle(div,null).width)
+        let wrap=document.getElementsByClassName("wrap")[0];
+        let content=document.getElementsByClassName("content")[0];
+        let box=document.getElementsByClassName("box")[0];
+        wrap.addEventListener("click",function(){
+            console.log("wrap 冒泡")
+
+        },false)
+        content.addEventListener("click",function(){
+            console.log("content 冒泡" )
+
+        },false)
+        box.addEventListener("click",function(){
+            console.log("box 冒泡" )
+
+        },false)
+        wrap.addEventListener("click",function(){
+            console.log("wrap")
+
+        },true)
+        content.addEventListener("click",function(){
+            console.log("content")
+
+        },true)
+        box.addEventListener("click",function(){
+            console.log("box")
+
+        },true)
+      
+
 
        
         
